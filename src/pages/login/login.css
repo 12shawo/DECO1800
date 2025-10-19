@@ -1,0 +1,139 @@
+:root{
+    --brand:#2f2df9;
+    --lav:#d9d9ff;
+    --muted:#6b7280;
+  }
+  
+  /* Basis */
+  body {
+    font-family: Poppins, sans-serif;
+    background: linear-gradient(180deg, rgba(249,249,255,0.85) 0%, rgba(228,235,255,0.85) 100%), 
+                url("images/surfBackground.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  
+  .phone{
+    width:min(420px,92vw);
+    border:12px solid #000; border-radius:36px;
+    padding:28px 22px 32px;
+    background:white;
+  }
+  
+  /* Tekst og UI */
+  .title{font-size:28px;font-weight:700;margin:12px 0 0}
+  .tagline{color:var(--muted);margin:4px 0 18px}
+  .hello{margin-bottom:20px}
+  .actions{display:grid;gap:12px}
+  .btn{
+    border:0;border-radius:14px;padding:14px 18px;
+    font-weight:600;cursor:pointer;
+  }
+  .btn.primary{background:var(--lav)}
+  .btn.secondary{background:#eef;border:2px solid #e2e6ff}
+  .full{width:100%}
+  .link{background:none;border:0;color:var(--brand);cursor:pointer;margin-top:8px}
+  .hidden{display:none}
+  .error{color:red;font-size:14px;min-height:18px}
+  .welcome{font-size:30px;color:var(--brand)}
+  label{display:grid;gap:6px;font-weight:600}
+  input{padding:12px 14px;border:2px solid #e6e6ff;border-radius:10px}
+  input:focus{border-color:var(--brand)}
+  
+  /* === PENERE, APP-AKTIG DESIGN === */
+  
+  /* Lys bakgrunnsgradient (overstyrer den hvite) */
+  body {
+    background: linear-gradient(180deg, #f9f9ff 0%, #e4ebff 100%);
+  }
+  
+  /* Selve 鈥渕obilrammen鈥� (overstyrer den tidlige .phone) */
+  .phone {
+    border: none;
+    border-radius: 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: 40px 30px;
+    background: #fff;
+  }
+  
+  /* Knapper */
+  .btn.primary {
+    background: var(--brand);
+    color: white;
+    transition: 0.3s;
+  }
+  .btn.primary:hover { opacity: 0.85; }
+  
+  .btn.secondary {
+    background: var(--lav);
+    border: none;
+    color: #000;
+    transition: 0.3s;
+  }
+  .btn.secondary:hover { background: #ecebff; }
+  
+  /* Logo- og overskriftsseksjon */
+  .brand{
+    display:flex; justify-content:center; align-items:center;
+    margin-bottom:10px;
+  }
+  
+  /* Emoji-logoen (bruk font-size for st酶rrelse) */
+  .logo{
+    font-size:72px;    /* juster 56|72|90px */
+    line-height:1;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  
+  /* Tekst */
+  .title{
+    font-size:28px;
+    font-weight:700;
+    text-align:center;
+  }
+  .tagline{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+  .hello{
+    text-align:center;
+    font-size:16px;
+  }
+  
+  /* Skjemaer */
+  form{display:grid;gap:14px}
+  input{
+    border:2px solid #e6e6ff;
+    border-radius:12px;
+    padding:14px 16px;
+    transition:border .2s;
+  }
+  input:focus{border-color:var(--brand)}
+  
+  /* Skygge p氓 knapper og input */
+  button, input{ box-shadow:0 3px 8px rgba(0,0,0,.05) }
+  
+
+  .skip {
+    display: block;
+    text-align: center;
+    color: var(--brand);
+    margin-top: 10px;
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .skip:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+  

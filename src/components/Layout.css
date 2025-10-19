@@ -1,0 +1,37 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f7fbff;
+  }
+  
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #2196f3, #1976d2);
+    color: white;
+    padding: 12px 20px;
+  }
+  
+  .app-nav .btn {
+    margin: 0 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  
+  .app-nav .btn.active {
+    text-decoration: underline;
+  }
+  
+  .app-nav .btn:hover {
+    opacity: 0.8;
+  }
+  
+  main {
+    flex: 1;
+    padding: 20px;
+  }
+  

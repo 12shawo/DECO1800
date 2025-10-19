@@ -1,0 +1,136 @@
+:root{
+    /* 主题配色：蓝白清爽风 */
+    --bg:        #f7fbff;   /* 页面背景：很浅的蓝白 */
+    --card:      #ffffff;   /* 面板/卡片纯白 */
+    --panel:     #2196f3;   /* 顶栏主蓝 */
+    --panel2:    #1976d2;   /* 深一点的辅蓝/悬停 */
+    --accent:    #0ea5e9;   /* 点缀青蓝（按钮/高亮） */
+    --text:      #0b1b2b;   /* 深蓝黑文字，更柔和 */
+    --muted:     #eef6ff;   /* 淡蓝填充/禁用背景 */
+    --border:    #e6effa;   /* 统一浅边框色 */
+    --link:      #0b79d0;   /* 链接蓝 */
+    --shadow:    0 8px 24px rgba(20,80,140,.08);
+  }
+  
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,Arial;
+  }
+  .app{display:flex;flex-direction:column;height:100vh}
+  
+  /* 顶栏 + 导航：蓝顶白字，按钮为白底蓝框 */
+  .topbar{
+    height:56px;display:flex;align-items:center;gap:12px;padding:0 16px;
+    background:linear-gradient(90deg,var(--panel),var(--panel2));
+    color:#fff;
+    border-bottom:1px solid rgba(255,255,255,.25);
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .topbar h1{font-size:18px;margin:0;color:#fff}
+  .tabs{margin-left:auto;display:flex;gap:8px}
+  .tabbtn{
+    background:#ffffff;border:1px solid rgba(255,255,255,.0);
+    color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;
+    text-decoration:none; box-shadow:var(--shadow);
+    transition:.2s ease;
+  }
+  .tabbtn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(20,80,140,.12)}
+  .tabbtn:focus-visible{outline:3px solid #bfe2ff; outline-offset:2px}
+  .tabbtn.active{
+    background:#ffffff;
+    border:1px solid #bfe2ff;
+    color:var(--panel2);
+  }
+  
+  /* 主容器 */
+  .main{display:flex;flex:1;overflow:hidden}
+  
+  /* 通用按钮：主按钮蓝底白字，次按钮白底蓝边 */
+  .btn{
+    background:#ffffff;border:1px solid var(--border);color:var(--text);
+    padding:10px 12px;border-radius:10px;cursor:pointer; transition:.2s ease;
+    box-shadow:var(--shadow);
+  }
+  .btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(20,80,140,.12)}
+  .btn:active{transform:translateY(0); box-shadow:var(--shadow)}
+  .btn:focus-visible{outline:3px solid #bfe2ff; outline-offset:2px}
+  
+  .btn.primary{
+    background:linear-gradient(180deg,var(--accent),#0a8bd1);
+    color:#fff;border:1px solid #0a8bd1;
+  }
+  .btn.primary:hover{filter:brightness(1.05)}
+  .btn.primary:disabled{opacity:.6; cursor:not-allowed}
+  
+  /* 输入框：白底浅边，聚焦蓝光环；去掉暗背景 */
+  .input{
+    padding:12px 12px;border-radius:12px;
+    border:1px solid var(--border);
+    background:#ffffff;color:var(--text);
+    transition:border-color .15s ease, box-shadow .15s ease;
+    box-shadow: inset 0 1px 2px rgba(10, 40, 80, .04);
+  }
+  .input::placeholder{color:#73839a}
+  .input:focus{
+    border-color:#bfe2ff;
+    box-shadow:0 0 0 4px rgba(33,150,243,.15);
+    outline:none;
+  }
+  
+  /* 可选：卡片/区块容器（如果你有卡片类） */
+  .card{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; padding:16px; box-shadow:var(--shadow);
+  }
+  
+  /* 链接统一风格 */
+  a{color:var(--link)}
+  a:hover{text-decoration:underline}
+  
+  /* 强制把聊天列表改成蓝白 */
+body .chatlist{ background:#f4f9ff !important; }
+
+/* 列表项默认、悬停、选中都变浅蓝 */
+body .chatitem{ background:transparent !important; }
+body .chatitem:hover{ background:#e9f4ff !important; }
+body .chatitem.active,
+body .chatitem.selected,
+body .chatitem[aria-selected="true"]{
+  background:#dfefff !important;
+  color:#0b1b2b !important;
+}
+
+/* 选中时的标题/预览颜色 */
+body .chatitem.active .name,
+body .chatitem.selected .name{ color:#0b1b2b !important; }
+body .chatitem.active .preview,
+body .chatitem.selected .preview{ color:#5c7ea5 !important; }
+
+/* 顶部搜索框保持白底蓝边 */
+body .search input{
+  background:#ffffff !important;
+  border:1px solid #cfe1ff !important;
+  color:#0b1b2b !important;
+}
+
+/* 让主容器撑满视口宽度，不截断右侧滚动内容 */
+.main {
+    width: 100% !important;
+    overflow-x: visible !important;
+  }
+  
+  /* 聊天区各层 100% 宽度，去掉可能的边距/内边距/最大宽度限制 */
+  .chat-page, .chat-container, .chatwin, .msgs {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  /* 确保右侧气泡真正贴到最右 */
+  .msg-row.me { justify-content: flex-end !important; }
+  .me .bubble { margin-right: 0 !important; }
+  

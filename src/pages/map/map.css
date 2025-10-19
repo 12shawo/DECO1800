@@ -1,0 +1,166 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Security reminder modal box style */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 修改为绝对路径，兼容 React 构建资源 */
+  background: url("/images/2.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  opacity: 0.8;
+  padding: 2vw;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-image img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.safety-text {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  line-height: 1.5;
+}
+
+.safety-text ul { padding-left: 20px; }
+
+#continue-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: #007AFF;
+  color: white;
+  border-radius: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Map container style */
+/* 新的：固定到视口，保证始终有高度 */
+#map-container{
+  position: fixed;
+  inset: 0;           /* top:0; right:0; bottom:0; left:0 */
+  width: 100vw;
+  height: 100vh;
+}
+#map{
+  width: 100%;
+  height: 100%;
+}
+
+
+.search-bar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  z-index: 500;
+}
+
+#search-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-sizing: border-box;
+}
+
+/* Hide the map by default */
+#map-container { display: none; }
+
+/* Mobile */
+@media (max-width: 450px) {
+  .modal-content { width: 100%; height: 100%; max-height: 100vh; border-radius: 0; padding: 20px; }
+  .search-bar { max-width: 90%; }
+}
+
+/* Popup style */
+.leaflet-popup-content-wrapper { border-radius: 10px; }
+.leaflet-popup-content { margin: 15px; font-size: 14px; line-height: 1.4; }
+
+.popup-header { font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+.surf-score { font-size: 24px; font-weight: bold; color: #007AFF; margin: 5px 0; }
+.score-description { font-style: italic; color: #555; margin-bottom: 15px; }
+
+.conditions-list { list-style: none; padding: 0; margin: 0; font-size: 12px; }
+.conditions-list li { padding: 2px 0; }
+
+/* "Back to Home" button style */
+.home-button a {
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+
+/* rating */
+.surf-score-display { display: flex; align-items: center; gap: 15px; margin: 10px 0 15px 0; cursor: help; }
+.score-number { font-size: 28px; font-weight: bold; color: #333; flex-shrink: 0; }
+.score-number span { font-size: 16px; font-weight: normal; color: #777; }
+.score-gauge { flex-grow: 1; height: 12px; background-color: #e9ecef; border-radius: 6px; overflow: hidden; }
+.score-gauge-fill { height: 100%; border-radius: 6px; transition: width 0.5s ease-in-out; }
+.score-red { background-color: #e74c3c; }
+.score-yellow { background-color: #f1c40f; }
+.score-green { background-color: #2ecc71; }
+
+.data-label {
+  font-weight: bold;
+  color: #0056b3;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #0056b3;
+}
+
+#close-explanation-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: #007AFF;
+  color: white;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}

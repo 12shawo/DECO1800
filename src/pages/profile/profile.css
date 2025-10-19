@@ -1,0 +1,162 @@
+/* 基础主题变量 */
+:root{
+  --brand: #1976d2;
+  --card-bg: rgba(255,255,255,0.86);
+  --card-border: rgba(255,255,255,0.6);
+  --card-shadow: 0 20px 40px rgba(0,0,0,.18);
+  --text-main: #0b1b2b;
+  --text-sub: #5c7ea5;
+}
+
+/* 背景：保留你的海图，同时加渐变遮罩保证标题/卡片可读性 */
+.cst-bg{
+  position: relative;
+  min-height: 100vh;
+  background-image: url("../images/surf.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.cst-bg::before{
+  content:"";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+     to bottom,
+     rgba(0,0,0,.45) 0%,
+     rgba(0,0,0,.15) 30%,
+     rgba(0,0,0,.35) 100%
+  );
+  pointer-events: none;
+}
+
+/* 顶部标题与返回 */
+.title{
+  position: relative;
+  padding: 54px 5% 8px;
+  z-index: 1;
+}
+.back-btn{
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 2;
+  background: rgba(255,255,255,.92);
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  color: var(--brand);
+  font-size: 22px; font-weight: 800;
+  cursor: pointer;
+}
+.back-btn:hover{ filter: brightness(1.03); }
+.title-text{
+  margin: 0;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .5px;
+  /* 在超大屏也不过度巨大 */
+  font-size: clamp(40px, 8vw, 96px);
+  text-shadow: 0 6px 24px rgba(0,0,0,.45);
+}
+
+/* 卡片区域 */
+.profile-section{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 64px;
+}
+.profile-card{
+  width: min(560px, 92vw);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 26px 22px 24px;
+  text-align: center;
+  color: var(--text-main);
+}
+
+/* 头像高亮：白边 + 品牌色外环 */
+.profile-photo{
+  width: 112px; height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block; margin: 0 auto 16px;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,.2);
+  outline: 3px solid var(--brand);
+}
+#username{
+  margin: 0;
+  font-size: 22px; font-weight: 800;
+  color: var(--text-main);
+}
+#user-email{
+  margin: 6px 0 16px;
+  color: var(--text-sub);
+  font-size: 14px;
+}
+
+/* 表单 */
+#profile-form{
+  text-align: left;
+}
+.labelformat{
+  display: block;
+  font-weight: 700;
+  color: #25405c;
+  margin: 12px 4px 6px;
+}
+#profile-form input,
+#profile-form textarea{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #cfe1ff;
+  background: #fff;
+  color: var(--text-main);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .02s ease;
+}
+#profile-form textarea{ min-height: 96px; resize: vertical; }
+#profile-form input:focus,
+#profile-form textarea:focus{
+  border-color: #5c9dff;
+  box-shadow: 0 0 0 3px #e8f2ff;
+}
+
+/* 保存按钮 */
+.save-btn{
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg,#42a5f5,#1e88e5);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(25,118,210,.25);
+  cursor: pointer;
+}
+.save-btn:hover{ filter: brightness(1.05); }
+.save-btn:active{ transform: translateY(1px); }
+
+.save-tip{
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+/* 小屏优化 */
+@media (max-width: 640px){
+  .title{ padding-top: 64px; }
+  .profile-card{ width: min(520px, 94vw); padding: 22px 18px; }
+  .profile-photo{ width: 104px; height: 104px; }
+}

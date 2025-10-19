@@ -1,0 +1,210 @@
+/* ======= 页面框架 ======= */
+html, body, #root { height: 100%; }
+.events-page{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f7fbff;
+  /* 轻度整体放大文本（px不易缩放，这里做温和放大） */
+  font-size: 16px;
+}
+
+/* ======= 统一宽度与对齐（默认 92% 屏宽，上下限保护） ======= */
+:root{
+  --ev-page-width: clamp(320px, 92vw, 1200px); /* 原 80vw/1040px → 92vw/1200px */
+  --ev-gap: 16px;
+}
+
+.ev-editor,
+.ev-searchbar,
+.ev-threadlist{
+  width: var(--ev-page-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 列表左右不再额外缩进，保证与编辑卡片外沿对齐 */
+.ev-threadlist{
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: var(--ev-gap);
+  padding-bottom: var(--ev-gap);
+  margin: var(--ev-gap) auto 24px;
+}
+
+/* ======= 顶部工具栏（蓝色渐变 + 胶囊切换） ======= */
+.ev-toolbar{
+  height: 56px;
+  background: linear-gradient(90deg,#2196f3,#1976d2);
+  border-bottom: 1px solid #cfe1ff;
+  display: flex; align-items: center;
+  gap: 12px; padding: 0 16px; color: #fff;
+}
+.backhome{
+  border: none; width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,0.22);
+  color: #fff; font-size: 18px; font-weight: 800;
+  display: grid; place-items: center; cursor: pointer;
+}
+.backhome:hover{ background: rgba(255,255,255,0.30); }
+.ev-title{ font-weight: 700; letter-spacing: .2px; }
+.ev-spacer{ flex: 1; }
+
+/* 胶囊切换 */
+.ev-toggle{
+  display: flex; gap: 4px; padding: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.20);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+.ev-chip{
+  appearance: none; border: 0; outline: 0;
+  padding: 9px 16px;              /* 轻度放大 */
+  border-radius: 999px;
+  background: transparent; color: #fff;
+  font-weight: 600; font-size: 15px; line-height: 1;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease, transform .02s ease;
+}
+.ev-chip:hover{ background: rgba(255,255,255,0.15); }
+.ev-chip:active{ transform: translateY(1px); }
+.ev-chip.is-active{
+  background: #fff; color: #1565c0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.ev-chip:disabled{
+  opacity: .6; cursor: not-allowed;
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+}
+@media (max-width: 640px){
+  .ev-toggle{ width: 100%; }
+  .ev-chip{ flex: 1; text-align: center; }
+}
+
+/* ======= 发帖编辑卡片（Title/Body/Posting） ======= */
+.ev-editor{
+  display: grid; gap: 12px;                    /* 稍放大间距 */
+  grid-template-columns: 1fr auto;
+  padding: 18px;                                /* 稍放大内边距 */
+  margin: var(--ev-gap) auto;
+  background: #fff; border: 1px solid #d6e7ff; border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(25,118,210,.08);
+}
+
+/* 输入框基础样式（会被“留白”规则覆盖宽度） */
+.ev-editor input,
+.ev-editor textarea{
+  grid-column: 1 / -1;
+  width: 100%;
+  border: 1px solid #b5cffb; border-radius: 12px;
+  padding: 12px 14px;                           /* 稍放大内边距 */
+  background: #fff; color: #0b1b2b;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.ev-editor textarea{ resize: vertical; min-height: 128px; }
+.ev-editor input:focus,
+.ev-editor textarea:focus{
+  border-color: #5c9dff; box-shadow: 0 0 0 3px #e8f2ff; outline: none;
+}
+
+/* —— 让 Title / Body 在卡片内略窄，左右留白；Posting 按钮对齐右边 —— */
+:root{ --ev-editor-inset: 16px; }        /* 控制留白大小，12~20px 都好看 */
+.ev-editor input,
+.ev-editor textarea{
+  width: calc(100% - var(--ev-editor-inset)*2);
+  margin-left: var(--ev-editor-inset);
+  margin-right: var(--ev-editor-inset);
+}
+.ev-post{
+  grid-column: 2 / 3; justify-self: end;
+  margin-right: var(--ev-editor-inset);  /* 与输入框右边缘对齐 */
+  background: linear-gradient(180deg,#42a5f5,#1e88e5);
+  border: none; color:#fff; padding: 13px 24px; /* 稍放大按钮 */
+  border-radius: 14px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 8px 18px rgba(33,150,243,.25);
+  font-size: 1rem;
+}
+.ev-post:disabled{ filter: grayscale(0.15) opacity(.8); cursor:not-allowed; }
+.ev-post:hover{ filter: brightness(1.05); }
+
+/* 小屏：整体更贴边，留白收窄 */
+@media (max-width: 640px){
+  .ev-editor{ width: calc(100vw - 32px); }
+  :root{ --ev-editor-inset: 12px; }
+}
+
+/* ======= 搜索框（更小、更精致） ======= */
+.ev-searchbar{
+  padding: 0 16px;
+  display: flex; justify-content: center; /* 居中 */
+}
+.ev-searchbar input{
+  width: 60%;                 /* 相对容器变小 */
+  min-width: 280px;           /* 最小宽度保护 */
+  max-width: 720px;           /* 最大宽度控制 */
+  background:#fff;
+  border:1px solid #cfe1ff; border-radius: 12px; padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+/* ======= 帖子列表 / 卡片 ======= */
+.ev-threadlist{
+  display: grid; gap: 14px;   /* 稍放大卡片间距 */
+}
+
+.ev-thread{
+  background:#fff; border:1px solid #e3efff; border-radius:14px;
+  box-shadow: 0 6px 16px rgba(25,118,210,.06);
+  overflow: hidden;
+}
+
+.ev-post-header{
+  display:flex; align-items:center; gap: 10px;
+  padding: 13px 14px; cursor: pointer; user-select: none;
+  border-bottom: 1px solid #eef5ff;
+  background: #fbfdff;
+}
+.ev-post-header:hover{ background: #f3f8ff; }
+
+.ev-post-left{ display:flex; align-items:center; gap:8px; min-width:0; flex: 1; }
+.ev-caret{ display:inline-block; transition: transform .16s ease; color:#5c7ea5; }
+.ev-caret.down{ transform: rotate(90deg); }
+
+.ev-title-text{
+  font-weight: 700; color:#0b1b2b;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-size: 1.02rem;
+}
+.ev-post-right{ display:flex; align-items:center; gap:8px; margin-left:auto; }
+
+.ev-counter{ color:#5c7ea5; font-size:12.5px; }
+.ev-like{
+  border:none; background:#ffeaf0; color:#d81b60;
+  border-radius: 999px; padding: 7px 11px; cursor:pointer; font-weight:700;
+  font-size: .95rem;
+}
+.ev-like:hover{ filter: brightness(1.04); }
+.ev-btn{
+  border:none; background:#e8f2ff; color:#1565c0;
+  border-radius: 999px; padding: 7px 12px; cursor:pointer; font-weight:700;
+  font-size: .95rem;
+}
+.ev-btn:hover{ filter: brightness(1.03); }
+
+/* 元信息 */
+.ev-meta{
+  padding: 9px 14px; color:#6b7f9a; font-size: 13px;
+}
+
+/* 正文（可折叠） */
+.ev-post-body{ max-height: 0; overflow: hidden; transition: max-height .18s ease; }
+.ev-thread.open .ev-post-body{ max-height: 520px; } /* 稍放大展开高度 */
+.ev-post-inner{ padding: 11px 14px 14px; }
+.ev-body-text{ color:#0b1b2b; font-size: 1rem; }
+.ev-body-empty{ color:#8aa2bb; font-style: italic; }
+
+/* 空列表 */
+.ev-empty{
+  text-align:center; color:#6b7f9a; padding: 40px 10px;
+}
